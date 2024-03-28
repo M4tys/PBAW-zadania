@@ -11,10 +11,12 @@ function getParams(&$form){
 }
 
 
-function validate(&$form,&$messages) {
+function validate(&$form,&$messages,&$hideBanner) {
 
 	if (! (isset($form['amount']) && isset($form['years']) && isset($form['interestRate']))) {
 		return false;
+	} else {
+		$hideBanner = true;
 	}
 
 	if ( $form['amount'] == "") {
@@ -63,9 +65,8 @@ $messages = [];
 $hideBanner = false;
 
 getParams($form);
-if(validate($form,$messages)){
+if(validate($form,$messages,$hideBanner)){
 	process($form,$messages,$monthlyRate);
-	$hideBanner = true;
 }
 
 
